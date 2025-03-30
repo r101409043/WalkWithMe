@@ -2,145 +2,109 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Walk With Me – Campus Safety</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Walk With Me</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: white;
-      color: black;
     }
 
-    /* Navbar */
     .navbar {
       background-color: black;
+      padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+    }
+
+    .navbar .logo a {
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+    }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      background-color: black;
+      width: 100%;
+      padding: 10px 0;
+    }
+
+    .nav-links.active {
+      display: flex;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
       padding: 10px 20px;
     }
 
-    .logo a {
-      color: white;
-      text-decoration: none;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .navbar-links a {
-      color: white;
-      text-decoration: none;
-      margin: 8px 12px;
-      font-size: 18px;
-    }
-
-    .navbar-links {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    /* Hero Section */
-    .title {
-      font-size: 42px;
-      font-weight: bold;
-      margin: 40px 20px 10px;
-    }
-
-    .subheader {
-      font-size: 22px;
-      margin: 0 20px 30px;
-    }
-
-    /* Main Layout */
-    .main {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      padding: 20px;
-    }
-
-    .suggestion-card {
-      background-color: #f4f4f4;
-      border-radius: 15px;
-      padding: 20px;
-      max-width: 300px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      flex: 1 1 250px;
-    }
-
-    .suggestion-card h3 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .suggestion-card p {
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-
-    .details-button {
-      background-color: white;
-      color: black;
-      border: 1px solid black;
-      padding: 8px 16px;
-      border-radius: 25px;
-      font-size: 14px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .details-button:hover {
-      background-color: black;
-      color: white;
-    }
-
-    .homepage-image {
-      max-width: 90%;
-      height: auto;
-      margin: 20px auto;
-      display: block;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .extra-content {
-      padding: 20px;
-      font-size: 16px;
-      text-align: center;
-    }
-
-    /* Responsive tweaks */
-    @media (max-width: 768px) {
-      .title {
-        font-size: 32px;
-        text-align: center;
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
       }
 
-      .subheader {
-        font-size: 18px;
-        text-align: center;
+      .nav-links {
+        display: flex !important;
+        flex-direction: row;
+        gap: 20px;
+        width: auto;
+        padding: 0;
       }
 
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .navbar-links {
-        justify-content: center;
-        width: 100%;
-      }
-
-      .navbar-links a {
-        margin: 5px 10px;
+      .nav-links a {
+        padding: 0;
       }
     }
   </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <div class="logo"><a href="../index.html">Walk With Me</a></div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="profile.html">Profile</a>
+      <a href="walkers.html">Walkers</a>
+      <a href="admin.html">Admin</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login/Signup</a>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
+  </script>
+
+</body>
+</html>
+
   <!-- Navbar -->
   <div class="navbar">
     <div class="logo"><a href="index.html">Walk With Me</a></div>
