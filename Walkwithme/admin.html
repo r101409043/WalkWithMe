@@ -1,42 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Walk With Me</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Walk With Me</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+
     .navbar {
       background-color: black;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      flex-wrap: wrap;
     }
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-size: 24px;
-      transition: text-decoration 0.3s ease;
-    }
-    .navbar a:hover {
-      text-decoration: underline;
-    }
+
     .logo a {
       color: white;
       text-decoration: none;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: bold;
     }
-    .logo a:hover {
-      text-decoration: underline;
+
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
     }
+
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+    }
+
+    .navbar-links {
+      display: none;
+      flex-direction: column;
+      background-color: black;
+      width: 100%;
+      padding: 10px 0;
+    }
+
+    .navbar-links.active {
+      display: flex;
+    }
+
+    .navbar-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 10px 20px;
+    }
+
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .navbar-links {
+        display: flex !important;
+        flex-direction: row;
+        gap: 20px;
+        width: auto;
+        padding: 0;
+      }
+
+      .navbar-links a {
+        padding: 0;
+      }
+    }
+
     .container {
       margin: 20px;
       padding: 20px;
       border: 1px solid #ccc;
     }
+
     h2 { background-color: #f2f2f2; padding: 10px; }
     table { width: 100%; border-collapse: collapse; }
     th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
@@ -47,11 +89,18 @@
   </style>
 </head>
 <body>
+
+  <!-- Responsive Navbar -->
   <div class="navbar">
     <div class="logo">
-      <a href="index.html">Walk With Me</a> 
+      <a href="index.html">Walk With Me</a>
     </div>
-    <div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="navbar-links" id="navLinks">
       <a href="profile.html">Profile</a>
       <a href="walkers.html">Walkers</a>
       <a href="admin.html">Admin</a>
@@ -59,7 +108,8 @@
       <a href="login.html">Login/Signup</a>
     </div>
   </div>
-<div class="container">
+
+  <div class="container">
     <h2>User and Walker Management</h2>
     <form id="manageWalkers">
         <input type="text" id="walkerId" placeholder="Enter Walker ID">
@@ -81,111 +131,110 @@
 
     <h2>Monitor Requests and Routes</h2>
     <button type="button" onclick="fetchRequests()">Refresh Requests</button>
-    <div id="requestsDisplay">
-        <!-- Requests will be displayed here -->
-    </div>
+    <div id="requestsDisplay"></div>
 
     <h2>Flagged Incidents</h2>
     <button type="button" onclick="fetchIncidents()">Refresh Incidents</button>
-    <div id="incidentsDisplay">
-        <!-- Incidents will be displayed here -->
-    </div>
+    <div id="incidentsDisplay"></div>
 
     <h2>Analytics Dashboard</h2>
     <button type="button" onclick="fetchAnalytics()">Show Analytics</button>
-    <div id="analyticsDisplay">
-        <!-- Analytics will be displayed here -->
-    </div>
-</div>
+    <div id="analyticsDisplay"></div>
+  </div>
 
-<script>
-function updateWalkerStatus() {
-    var walkerId = document.getElementById('walkerId').value;
-    var status = document.getElementById('walkerStatus').value;
-    fetch('api/walker/updateStatus', {
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('active');
+    }
+
+    function updateWalkerStatus() {
+      var walkerId = document.getElementById('walkerId').value;
+      var status = document.getElementById('walkerStatus').value;
+      fetch('api/walker/updateStatus', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ walkerId: walkerId, status: status })
-    }).then(response => response.json())
-      .then(data => alert("Status updated: " + data.message))
-      .catch(error => {
-        console.error('Error:', error);
-        alert("Error updating status.");
-      });
-}
+      }).then(res => res.json())
+        .then(data => alert("Status updated: " + data.message))
+        .catch(err => {
+          console.error('Error:', err);
+          alert("Error updating status.");
+        });
+    }
 
-function updateUserStatus() {
-    var userId = document.getElementById('userId').value;
-    var status = document.getElementById('userStatus').value;
-    fetch('api/user/updateStatus', {
+    function updateUserStatus() {
+      var userId = document.getElementById('userId').value;
+      var status = document.getElementById('userStatus').value;
+      fetch('api/user/updateStatus', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: userId, status: status })
-    }).then(response => response.json())
-      .then(data => alert("Status updated: " + data.message))
-      .catch(error => {
-        console.error('Error:', error);
-        alert("Error updating status.");
-      });
-}
+      }).then(res => res.json())
+        .then(data => alert("Status updated: " + data.message))
+        .catch(err => {
+          console.error('Error:', err);
+          alert("Error updating status.");
+        });
+    }
 
-function fetchRequests() {
-    fetch('api/requests')
-    .then(response => response.json())
-    .then(data => {
-        const display = document.getElementById('requestsDisplay');
-        display.innerHTML = '<table>' +
+    function fetchRequests() {
+      fetch('api/requests')
+        .then(res => res.json())
+        .then(data => {
+          const display = document.getElementById('requestsDisplay');
+          display.innerHTML = '<table>' +
             data.map(req => `<tr><td>${req.request_id}</td><td>${req.user_id}</td><td>${req.status}</td></tr>`).join('') +
             '</table>';
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('requestsDisplay').innerHTML = '<p class="error">Failed to load requests.</p>';
-    });
-}
+        })
+        .catch(err => {
+          console.error('Error:', err);
+          document.getElementById('requestsDisplay').innerHTML = '<p class="error">Failed to load requests.</p>';
+        });
+    }
 
-function fetchIncidents() {
-    fetch('api/incidents')
-    .then(response => response.json())
-    .then(data => {
-        const display = document.getElementById('incidentsDisplay');
-        display.innerHTML = '<table>' +
+    function fetchIncidents() {
+      fetch('api/incidents')
+        .then(res => res.json())
+        .then(data => {
+          const display = document.getElementById('incidentsDisplay');
+          display.innerHTML = '<table>' +
             data.map(inc => `<tr><td>${inc.incident_id}</td><td>${inc.description}</td><td>${inc.status}</td><td><button onclick="updateIncidentStatus(${inc.incident_id}, 'Resolved')">Mark as Resolved</button></td></tr>`).join('') +
             '</table>';
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('incidentsDisplay').innerHTML = '<p class="error">Failed to load incidents.</p>';
-    });
-}
+        })
+        .catch(err => {
+          console.error('Error:', err);
+          document.getElementById('incidentsDisplay').innerHTML = '<p class="error">Failed to load incidents.</p>';
+        });
+    }
 
-function updateIncidentStatus(incidentId, newStatus) {
-    fetch('api/incidents/update', {
+    function updateIncidentStatus(incidentId, newStatus) {
+      fetch('api/incidents/update', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ incidentId: incidentId, status: newStatus })
-    }).then(response => response.json())
-      .then(data => alert("Incident status updated: " + data.message))
-      .catch(error => {
-        console.error('Error:', error);
-        alert("Error updating incident status.");
-      });
-}
+      }).then(res => res.json())
+        .then(data => alert("Incident status updated: " + data.message))
+        .catch(err => {
+          console.error('Error:', err);
+          alert("Error updating incident status.");
+        });
+    }
 
-function fetchAnalytics() {
-    fetch('api/analytics')
-    .then(response => response.json())
-    .then(data => {
-        const display = document.getElementById('analyticsDisplay');
-        display.innerHTML = '<ul>' +
+    function fetchAnalytics() {
+      fetch('api/analytics')
+        .then(res => res.json())
+        .then(data => {
+          const display = document.getElementById('analyticsDisplay');
+          display.innerHTML = '<ul>' +
             data.map(item => `<li>${item.metric}: ${item.value}</li>`).join('') +
             '</ul>';
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('analyticsDisplay').innerHTML = '<p class="error">Failed to load analytics.</p>';
-    });
-}
-</script>
+        })
+        .catch(err => {
+          console.error('Error:', err);
+          document.getElementById('analyticsDisplay').innerHTML = '<p class="error">Failed to load analytics.</p>';
+        });
+    }
+  </script>
 </body>
 </html>
