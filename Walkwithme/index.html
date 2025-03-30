@@ -1,39 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Walk With Me Suggestions</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Walk With Me – Campus Safety</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: white; /* Overall background color */
+      background-color: white;
       color: black;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh; /* Ensures full height for positioning */
     }
 
-    /* Top Navigation Bar */
+    /* Navbar */
     .navbar {
       background-color: black;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
       padding: 10px 20px;
-    }
-
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-size: 24px; /* 1.5x larger than normal text size */
-      transition: text-decoration 0.3s ease;
-    }
-
-    .navbar a:hover {
-      text-decoration: underline;
     }
 
     .logo a {
@@ -43,74 +29,67 @@
       font-weight: bold;
     }
 
-    .logo a:hover {
-      text-decoration: underline;
+    .navbar-links a {
+      color: white;
+      text-decoration: none;
+      margin: 8px 12px;
+      font-size: 18px;
     }
 
-    /* Title Styling */
+    .navbar-links {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    /* Hero Section */
     .title {
-      margin: 50px 20px 20px 20px; /* Adjust for spacing */
-      font-size: 48px;
+      font-size: 42px;
       font-weight: bold;
+      margin: 40px 20px 10px;
     }
 
-    /* Subheader Styling */
     .subheader {
-      margin: 20px 20px 40px 20px; /* Adjusted spacing to lower the subheader */
-      font-size: 24px; /* Smaller than the title */
-      font-weight: normal;
+      font-size: 22px;
+      margin: 0 20px 30px;
     }
 
-    /* Subtitle Styling */
-    .subtitle {
-      font-size: 36px;
-      font-weight: bold;
-      margin-left: 20px; /* Align subtitle to the left */
+    /* Main Layout */
+    .main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+    }
+
+    .suggestion-card {
+      background-color: #f4f4f4;
+      border-radius: 15px;
+      padding: 20px;
+      max-width: 300px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      flex: 1 1 250px;
+    }
+
+    .suggestion-card h3 {
+      font-size: 20px;
       margin-bottom: 10px;
     }
 
-    /* Main Content Wrapper */
-    .content {
-      margin-top: auto; /* Pushes the content to the bottom */
-      margin-left: 20px; /* Align content to the left */
-      padding-bottom: 20px;
-      display: flex; /* Flex layout to align cards horizontally */
-      gap: 20px; /* Space between cards */
-    }
-
-    /* Suggestion Card */
-    .suggestion-card {
-      background-color: #f4f4f4; /* Light gray background for card */
-      border-radius: 15px;
-      padding: 10px 20px;
-      margin: 10px 0; /* Space between multiple cards */
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      width: fit-content; /* Card adjusts to content width */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .suggestion-content h3 {
-      font-size: 24px;
-      margin: 0 0 10px 0;
-    }
-
-    .suggestion-content p {
+    .suggestion-card p {
       font-size: 16px;
-      margin: 0 0 10px 0;
+      margin-bottom: 10px;
     }
 
     .details-button {
       background-color: white;
       color: black;
       border: 1px solid black;
-      padding: 10px 20px;
+      padding: 8px 16px;
       border-radius: 25px;
-      font-size: 16px;
+      font-size: 14px;
       text-decoration: none;
       transition: all 0.3s ease;
-      display: inline-block;
     }
 
     .details-button:hover {
@@ -118,90 +97,92 @@
       color: white;
     }
 
-    /* Image Section on Right */
     .homepage-image {
-      position: absolute;
-      top: 100px; /* Adjust positioning as needed */
-      right: 150px; /* Move it further to the left */
-      max-width: 800px; /* Increase size */
+      max-width: 90%;
       height: auto;
-      border-radius: 10px; /* Optional rounded edges */
+      margin: 20px auto;
+      display: block;
+      border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    /* Extra Content Below Suggestions */
     .extra-content {
-      margin-left: 20px; /* Align extra content to the left */
-      font-size: 18px;
-      padding-top: 10px;
+      padding: 20px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      .title {
+        font-size: 32px;
+        text-align: center;
+      }
+
+      .subheader {
+        font-size: 18px;
+        text-align: center;
+      }
+
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar-links {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .navbar-links a {
+        margin: 5px 10px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Navigation Bar -->
+  <!-- Navbar -->
   <div class="navbar">
-    <div class="logo">
-      <a href="index.html">Walk With Me</a> <!-- Links back to homepage -->
-    </div>
-    <div>
-      <a href="profile.html">Profile</a>
-      <a href="walkers.html">Walkers</a>
-      <a href="admin.html">Admin</a>
-      <a href="contact.html">Contact</a>
-      <a href="login.html">Login/Signup</a>
+    <div class="logo"><a href="index.html">Walk With Me</a></div>
+    <div class="navbar-links">
+      <a href="Walkwithme/profile.html">Profile</a>
+      <a href="Walkwithme/walkers.html">Walkers</a>
+      <a href="Walkwithme/admin.html">Admin</a>
+      <a href="Walkwithme/contact.html">Contact</a>
+      <a href="Walkwithme/login.html">Login/Signup</a>
     </div>
   </div>
 
-  <!-- Title -->
-  <div class="title">
-    Have some company<br>
-    with Walk With Me!
-  </div>
+  <!-- Hero -->
+  <div class="title">Have some company<br>with Walk With Me!</div>
+  <div class="subheader">Feel safe wherever you go!</div>
 
-  <!-- Subheader -->
-  <div class="subheader">
-    Feel safe wherever you go! demo 1
-  </div>
+  <!-- Image -->
+  <img class="homepage-image" src="https://www.wlu.edu/assets/Admissions/banner-admissions-johnsonbrochure9-28-22-05-2.jpeg" alt="Campus safety image"/>
 
-  <!-- Suggestions Section -->
-  <div class="content">
-    <!-- Reserve Card -->
+  <!-- Cards -->
+  <div class="main">
     <div class="suggestion-card">
-      <div class="suggestion-content">
-        <h3>Reserve</h3>
-        <p>Reserve a walker in advance so you have less to worry.</p>
-        <a href="walkers.html" class="details-button">Details</a>
-      </div>
+      <h3>Reserve</h3>
+      <p>Reserve a walker in advance so you have less to worry.</p>
+      <a class="details-button" href="Walkwithme/walkers.html">Details</a>
     </div>
-
-    <!-- Walker Card -->
     <div class="suggestion-card">
-      <div class="suggestion-content">
-        <h3>Walker</h3>
-        <p>Feel safe on your walk. Request a walker, and go.</p>
-        <a href="login.html" class="details-button">Details</a>
-      </div>
+      <h3>Walker</h3>
+      <p>Feel safe on your walk. Request a walker, and go.</p>
+      <a class="details-button" href="Walkwithme/login.html">Details</a>
     </div>
-
-    <!-- Your Walks Card -->
     <div class="suggestion-card">
-      <div class="suggestion-content">
-        <h3>Your Walks</h3>
-        <p>See your metrics and all your past walks with us!</p>
-        <a href="profile.html" class="details-button">Details</a>
-      </div>
+      <h3>Your Walks</h3>
+      <p>See your metrics and all your past walks with us!</p>
+      <a class="details-button" href="Walkwithme/profile.html">Details</a>
     </div>
   </div>
 
-  <!-- Extra Content Below Suggestions -->
+  <!-- Footer -->
   <div class="extra-content">
-    <p>Looking for more features? Stay tuned as we continue to expand Walk With Me to make campus safety even better.</p>
-    <p>Have feedback or suggestions? Reach out to us through our <a href="contact.html">Contact Page</a>.</p>
+    Looking for more features? Stay tuned as we continue to expand Walk With Me to make campus safety even better.<br><br>
+    Have feedback or suggestions? Reach out to us through our <a href="Walkwithme/contact.html">Contact Page</a>.
   </div>
-
-  <!-- Right-Side Image -->
-  <img src="https://www.wlu.edu/assets/Admissions/banner-admissions-johnsonbrochure9-28-22-05-2.jpeg" 
-       alt="Campus Image" 
-       class="homepage-image">
 </body>
 </html>
