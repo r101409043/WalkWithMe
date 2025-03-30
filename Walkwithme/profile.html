@@ -9,42 +9,77 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: white; /* Matched with code 1 */
+            background-color: white;
             color: black;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Full height */
+            min-height: 100vh;
         }
         .navbar {
-            background-color: black; /* Matched with code 1 */
+            background-color: black;
             color: white;
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
-        .navbar a {
+        .logo a {
             color: white;
             text-decoration: none;
-            margin: 0 15px;
-            font-size: 24px; /* Matched code 1 */
-            transition: text-decoration 0.3s ease;
+            font-size: 20px;
+            font-weight: bold;
         }
-        .navbar a:hover {
-            text-decoration: underline;
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
         }
-        h1 {
-            font-size: 36px;
+        .menu-toggle div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+        }
+        .navbar-links {
+            display: none;
+            flex-direction: column;
+            background-color: black;
+            width: 100%;
+            padding: 10px 0;
+        }
+        .navbar-links.active {
+            display: flex;
+        }
+        .navbar-links a {
             color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+        }
+        @media (min-width: 769px) {
+            .menu-toggle {
+                display: none;
+            }
+            .navbar-links {
+                display: flex !important;
+                flex-direction: row;
+                gap: 20px;
+                width: auto;
+                padding: 0;
+            }
+            .navbar-links a {
+                padding: 0;
+            }
         }
         .container {
             padding: 20px;
         }
         .section {
-            background: #f4f4f4; /* Matched code 1 */
+            background: #f4f4f4;
             margin-bottom: 20px;
             padding: 20px;
-            border-radius: 15px; /* Rounded corners like code 1 */
+            border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .section h2 {
@@ -52,7 +87,7 @@
             margin-top: 0;
         }
         .button {
-            background-color: white; /* Matched to "Details" button in code 1 */
+            background-color: white;
             color: black;
             border: 1px solid black;
             padding: 10px 20px;
@@ -108,20 +143,24 @@
 </head>
 <body>
     <div class="navbar">
-        <div>
-            <a href="index.html">Walk With Me</a> <!-- Matched navbar links -->
+        <div class="logo">
+            <a href="index.html">Walk With Me</a>
         </div>
-        <nav>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="navbar-links" id="navLinks">
             <a href="profile.html">Profile</a>
             <a href="walkers.html">Walkers</a>
             <a href="admin.html">Admin</a>
             <a href="contact.html">Contact</a>
             <a href="login.html">Login/Signup</a>
-        </nav>
+        </div>
     </div>
 
     <div class="container">
-        <!-- Request a Walker Section -->
         <div class="section" id="request-walker">
             <h2>Request a Walker</h2>
             <form>
@@ -138,7 +177,6 @@
             </form>
         </div>
 
-        <!-- Current and Past Requests Section -->
         <div class="section" id="requests">
             <h2>Current and Past Requests</h2>
             <table>
@@ -170,7 +208,6 @@
             </table>
         </div>
 
-        <!-- Notifications Section -->
         <div class="section" id="notifications">
             <h2>Notifications</h2>
             <ul>
@@ -179,7 +216,6 @@
             </ul>
         </div>
 
-        <!-- Quick Links Section -->
         <div class="section" id="quick-links">
             <h2>Quick Links</h2>
             <div class="link-list">
@@ -189,5 +225,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
