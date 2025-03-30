@@ -29,16 +29,56 @@
       font-weight: bold;
     }
 
-    .navbar-links a {
-      color: white;
-      text-decoration: none;
-      margin: 8px 12px;
-      font-size: 18px;
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
     }
 
     .navbar-links {
       display: flex;
-      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .navbar-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    /* Responsive: mobile hamburger */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .navbar-links {
+        display: none;
+        flex-direction: column;
+        background-color: black;
+        width: 100%;
+        padding: 10px 0;
+      }
+
+      .navbar-links.active {
+        display: flex;
+      }
+
+      .navbar-links a {
+        padding: 10px 20px;
+      }
+
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
     /* Hero Section */
@@ -53,7 +93,6 @@
       margin: 0 20px 30px;
     }
 
-    /* Main Layout */
     .main {
       display: flex;
       flex-wrap: wrap;
@@ -111,40 +150,19 @@
       font-size: 16px;
       text-align: center;
     }
-
-    /* Responsive tweaks */
-    @media (max-width: 768px) {
-      .title {
-        font-size: 32px;
-        text-align: center;
-      }
-
-      .subheader {
-        font-size: 18px;
-        text-align: center;
-      }
-
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .navbar-links {
-        justify-content: center;
-        width: 100%;
-      }
-
-      .navbar-links a {
-        margin: 5px 10px;
-      }
-    }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
+
+  <!-- Navigation -->
   <div class="navbar">
     <div class="logo"><a href="index.html">Walk With Me</a></div>
-    <div class="navbar-links">
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="navbar-links" id="navLinks">
       <a href="Walkwithme/profile.html">Profile</a>
       <a href="Walkwithme/walkers.html">Walkers</a>
       <a href="Walkwithme/admin.html">Admin</a>
@@ -184,5 +202,13 @@
     Looking for more features? Stay tuned as we continue to expand Walk With Me to make campus safety even better.<br><br>
     Have feedback or suggestions? Reach out to us through our <a href="Walkwithme/contact.html">Contact Page</a>.
   </div>
+
+  <!-- JavaScript -->
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('active');
+    }
+  </script>
 </body>
 </html>
