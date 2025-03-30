@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -15,7 +14,6 @@
       overflow: hidden;
     }
 
-    /* Enhanced Stars effect */
     .stars {
       position: absolute;
       width: 100%;
@@ -36,25 +34,72 @@
       100% { opacity: 0; transform: scale(1); }
     }
 
-    /* Navigation Bar */
     .navbar {
       background-color: black;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
       padding: 10px 20px;
     }
 
     .logo a {
       color: white;
       text-decoration: none;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: bold;
     }
 
-    .logo a:hover {
-      text-decoration: underline;
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
     }
 
-    /* Login Form */
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+    }
+
+    .navbar-links {
+      display: none;
+      flex-direction: column;
+      background-color: black;
+      width: 100%;
+      padding: 10px 0;
+    }
+
+    .navbar-links.active {
+      display: flex;
+    }
+
+    .navbar-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 10px 20px;
+    }
+
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .navbar-links {
+        display: flex !important;
+        flex-direction: row;
+        gap: 20px;
+        width: auto;
+        padding: 0;
+      }
+
+      .navbar-links a {
+        padding: 0;
+      }
+    }
+
     .login-container {
       background-color: rgba(30, 30, 30, 0.95);
       border-radius: 10px;
@@ -142,17 +187,26 @@
   </style>
 </head>
 <body>
-  <!-- Navigation Bar -->
   <div class="navbar">
     <div class="logo">
       <a href="index.html">Walk With Me</a>
     </div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="navbar-links" id="navLinks">
+      <a href="profile.html">Profile</a>
+      <a href="walkers.html">Walkers</a>
+      <a href="admin.html">Admin</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login/Signup</a>
+    </div>
   </div>
 
-  <!-- Stars Background -->
   <div class="stars" id="stars"></div>
 
-  <!-- Login Form -->
   <div class="login-container">
     <h1>Welcome back!</h1>
     <p>We're so excited to see you again!</p>
@@ -176,42 +230,33 @@
   </div>
 
   <script>
-    // Enhanced stars background
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('active');
+    }
+
     function createStars() {
       const stars = document.getElementById('stars');
-      const numberOfStars = 100; // Increased number of stars
-      
+      const numberOfStars = 100;
       for (let i = 0; i < numberOfStars; i++) {
         const star = document.createElement('div');
         star.className = 'star';
-        
-        // Random position
-        const left = Math.random() * 100;
-        const top = Math.random() * 100;
-        
-        // Varied star sizes
-        const size = Math.random() * 3 + 1; // 1-4px
-        
-        star.style.left = `${left}%`;
-        star.style.top = `${top}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        const size = Math.random() * 3 + 1;
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
-        
-        // Random animation delay and duration
         star.style.animationDelay = `${Math.random() * 2}s`;
-        star.style.animationDuration = `${Math.random() * 3 + 1}s`; // 1-4s duration
-        
+        star.style.animationDuration = `${Math.random() * 3 + 1}s`;
         stars.appendChild(star);
       }
     }
 
-    // Handle login and redirect
     function handleLogin(event) {
-      event.preventDefault(); // Prevent the form from submitting normally
-      window.location.href = 'index.html'; // Redirect to homepage
+      event.preventDefault();
+      window.location.href = 'index.html';
     }
 
-    // Call the function when the page loads
     window.onload = createStars;
   </script>
 </body>
